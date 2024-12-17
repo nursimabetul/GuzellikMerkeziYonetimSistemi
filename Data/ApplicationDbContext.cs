@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using GuzellikMerkeziYonetimSistemi.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace GuzellikMerkeziYonetimSistemi.Data
@@ -9,5 +10,7 @@ namespace GuzellikMerkeziYonetimSistemi.Data
             : base(options)
         {
         }
+
+        public DbSet<Personel>Personels { get; set; }
     }
 }

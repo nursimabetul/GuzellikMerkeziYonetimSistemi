@@ -10,22 +10,22 @@ using GuzellikMerkeziYonetimSistemi.Models;
 
 namespace GuzellikMerkeziYonetimSistemi.Controllers
 {
-    public class IslemsController : Controller
+    public class IslemKategorisController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public IslemsController(ApplicationDbContext context)
+        public IslemKategorisController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Islems
+        // GET: IslemKategoris
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Islems.ToListAsync());
+            return View(await _context.IslemKategoris.ToListAsync());
         }
 
-        // GET: Islems/Details/5
+        // GET: IslemKategoris/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace GuzellikMerkeziYonetimSistemi.Controllers
                 return NotFound();
             }
 
-            var islem = await _context.Islems
+            var islemKategori = await _context.IslemKategoris
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (islem == null)
+            if (islemKategori == null)
             {
                 return NotFound();
             }
 
-            return View(islem);
+            return View(islemKategori);
         }
 
-        // GET: Islems/Create
+        // GET: IslemKategoris/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Islems/Create
+        // POST: IslemKategoris/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IslemAdi,Sure,Fiyat,Aciklama")] Islem islem)
+        public async Task<IActionResult> Create([Bind("Id,Kategori,KategoriAciklama")] IslemKategori islemKategori)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(islem);
+                _context.Add(islemKategori);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(islem);
+            return View(islemKategori);
         }
 
-        // GET: Islems/Edit/5
+        // GET: IslemKategoris/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace GuzellikMerkeziYonetimSistemi.Controllers
                 return NotFound();
             }
 
-            var islem = await _context.Islems.FindAsync(id);
-            if (islem == null)
+            var islemKategori = await _context.IslemKategoris.FindAsync(id);
+            if (islemKategori == null)
             {
                 return NotFound();
             }
-            return View(islem);
+            return View(islemKategori);
         }
 
-        // POST: Islems/Edit/5
+        // POST: IslemKategoris/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IslemAdi,Sure,Fiyat,Aciklama")] Islem islem)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Kategori,KategoriAciklama")] IslemKategori islemKategori)
         {
-            if (id != islem.Id)
+            if (id != islemKategori.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace GuzellikMerkeziYonetimSistemi.Controllers
             {
                 try
                 {
-                    _context.Update(islem);
+                    _context.Update(islemKategori);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!IslemExists(islem.Id))
+                    if (!IslemKategoriExists(islemKategori.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace GuzellikMerkeziYonetimSistemi.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(islem);
+            return View(islemKategori);
         }
 
-        // GET: Islems/Delete/5
+        // GET: IslemKategoris/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,34 +124,34 @@ namespace GuzellikMerkeziYonetimSistemi.Controllers
                 return NotFound();
             }
 
-            var islem = await _context.Islems
+            var islemKategori = await _context.IslemKategoris
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (islem == null)
+            if (islemKategori == null)
             {
                 return NotFound();
             }
 
-            return View(islem);
+            return View(islemKategori);
         }
 
-        // POST: Islems/Delete/5
+        // POST: IslemKategoris/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var islem = await _context.Islems.FindAsync(id);
-            if (islem != null)
+            var islemKategori = await _context.IslemKategoris.FindAsync(id);
+            if (islemKategori != null)
             {
-                _context.Islems.Remove(islem);
+                _context.IslemKategoris.Remove(islemKategori);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool IslemExists(int id)
+        private bool IslemKategoriExists(int id)
         {
-            return _context.Islems.Any(e => e.Id == id);
+            return _context.IslemKategoris.Any(e => e.Id == id);
         }
     }
 }

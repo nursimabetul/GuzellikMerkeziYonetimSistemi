@@ -12,6 +12,8 @@ namespace GuzellikMerkeziYonetimSistemi.Data
         }
 
         public DbSet<Personel>Personels { get; set; }
-        public DbSet<Islem> Islem { get; set; }
-    }
+        public DbSet<Islem> Islems { get; set; }
+		public DbSet<IslemKategori> IslemKategoris { get; set; }
+
+	}
 }

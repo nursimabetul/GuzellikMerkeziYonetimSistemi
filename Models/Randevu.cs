@@ -4,13 +4,20 @@
 	{
 		public int Id { get; set; }
 		public DateTime RandevuTarihi { get; set; }
-		
-		// İşlem Türü
 
+
+		public int PersonelId { get; set; }
+		public Personel Personel { get; set; }
+
+		// İşlem Türü
+		public int IslemId { get; set; }
+		public Islem Islem    { get; set; }   
 		// İşlem Süresi
 
 		// Ücret
 
+
+		
 		// Randevu alan kullanıcı bilgileri
 
 		// Durumu

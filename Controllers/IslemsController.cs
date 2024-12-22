@@ -22,7 +22,8 @@ namespace GuzellikMerkeziYonetimSistemi.Controllers
         // GET: Islems
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Islems.ToListAsync());
+            var applicationDbContext = _context.Islems.Include(i => i.IslemKategori);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Islems/Details/5
@@ -34,6 +35,7 @@ namespace GuzellikMerkeziYonetimSistemi.Controllers
             }
 
             var islem = await _context.Islems
+                .Include(i => i.IslemKategori)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (islem == null)
             {
@@ -46,6 +48,7 @@ namespace GuzellikMerkeziYonetimSistemi.Controllers
         // GET: Islems/Create
         public IActionResult Create()
         {
+            ViewData["IslemKategoriId"] = new SelectList(_context.IslemKategoris, "Id", "Id");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace GuzellikMerkeziYonetimSistemi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IslemAdi,Sure,Fiyat,Aciklama")] Islem islem)
+        public async Task<IActionResult> Create([Bind("Id,IslemAdi,IslemKategoriId,Sure,Fiyat,Aciklama")] Islem islem)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,7 @@ namespace GuzellikMerkeziYonetimSistemi.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["IslemKategoriId"] = new SelectList(_context.IslemKategoris, "Id", "Id", islem.IslemKategoriId);
             return View(islem);
         }
 
@@ -78,6 +82,7 @@ namespace GuzellikMerkeziYonetimSistemi.Controllers
             {
                 return NotFound();
             }
+            ViewData["IslemKategoriId"] = new SelectList(_context.IslemKategoris, "Id", "Id", islem.IslemKategoriId);
             return View(islem);
         }
 
@@ -86,7 +91,7 @@ namespace GuzellikMerkeziYonetimSistemi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IslemAdi,Sure,Fiyat,Aciklama")] Islem islem)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,IslemAdi,IslemKategoriId,Sure,Fiyat,Aciklama")] Islem islem)
         {
             if (id != islem.Id)
             {
@@ -113,6 +118,7 @@ namespace GuzellikMerkeziYonetimSistemi.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["IslemKategoriId"] = new SelectList(_context.IslemKategoris, "Id", "Id", islem.IslemKategoriId);
             return View(islem);
         }
 
@@ -125,6 +131,7 @@ namespace GuzellikMerkeziYonetimSistemi.Controllers
             }
 
             var islem = await _context.Islems
+                .Include(i => i.IslemKategori)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (islem == null)
             {

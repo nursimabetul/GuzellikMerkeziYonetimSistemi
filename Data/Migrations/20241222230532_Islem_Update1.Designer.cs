@@ -4,6 +4,7 @@ using GuzellikMerkeziYonetimSistemi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GuzellikMerkeziYonetimSistemi.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241222230532_Islem_Update1")]
+    partial class Islem_Update1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,7 +45,7 @@ namespace GuzellikMerkeziYonetimSistemi.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("IslemKategoriId")
+                    b.Property<int>("IslemKategoriId")
                         .HasColumnType("int");
 
                     b.Property<int>("Sure")
@@ -318,7 +321,9 @@ namespace GuzellikMerkeziYonetimSistemi.Data.Migrations
                 {
                     b.HasOne("GuzellikMerkeziYonetimSistemi.Models.IslemKategori", "IslemKategori")
                         .WithMany()
-                        .HasForeignKey("IslemKategoriId");
+                        .HasForeignKey("IslemKategoriId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("IslemKategori");
                 });

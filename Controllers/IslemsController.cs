@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using GuzellikMerkeziYonetimSistemi.Data;
 using GuzellikMerkeziYonetimSistemi.Models;
 
-namespace GuzellikMerkeziYonetimSistemi.Controllers
+namespace GuzellikMerkeziYonetimSistemi
 {
     public class IslemsController : Controller
     {
@@ -48,7 +48,7 @@ namespace GuzellikMerkeziYonetimSistemi.Controllers
         // GET: Islems/Create
         public IActionResult Create()
         {
-            ViewData["IslemKategoriId"] = new SelectList(_context.IslemKategoris, "Id", "Kategori");
+            ViewData["IslemKategoriId"] = new SelectList(_context.IslemKategoris, "Id", "Id");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace GuzellikMerkeziYonetimSistemi.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IslemKategoriId"] = new SelectList(_context.IslemKategoris, "Id", "Kategori", islem.IslemKategoriId);
+            ViewData["IslemKategoriId"] = new SelectList(_context.IslemKategoris, "Id", "Id", islem.IslemKategoriId);
             return View(islem);
         }
 

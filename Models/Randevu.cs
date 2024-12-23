@@ -11,7 +11,7 @@
 
 		// İşlem Türü
 		public int IslemId { get; set; }
-		public Islem Islem    { get; set; }   
+		//public Islem Islem    { get; set; }   
 		// İşlem Süresi
 
 		// Ücret

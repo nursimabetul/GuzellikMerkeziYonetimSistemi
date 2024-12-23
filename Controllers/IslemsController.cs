@@ -48,7 +48,7 @@ namespace GuzellikMerkeziYonetimSistemi.Controllers
         // GET: Islems/Create
         public IActionResult Create()
         {
-            ViewData["IslemKategoriId"] = new SelectList(_context.IslemKategoris, "Id", "Id");
+            ViewData["IslemKategoriId"] = new SelectList(_context.IslemKategoris, "Id", "Kategori");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace GuzellikMerkeziYonetimSistemi.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IslemKategoriId"] = new SelectList(_context.IslemKategoris, "Id", "Id", islem.IslemKategoriId);
+            ViewData["IslemKategoriId"] = new SelectList(_context.IslemKategoris, "Id", "Kategori", islem.IslemKategoriId);
             return View(islem);
         }
 

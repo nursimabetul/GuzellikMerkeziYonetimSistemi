@@ -11,7 +11,6 @@
 		public int? UzmanlikId { get; set; }
 		public Uzmanlik Uzmanlik { get; set; }
 
-
 		public int SalonId { get; set; }
 		public Salon Salon { get; set; }
 

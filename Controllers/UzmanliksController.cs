@@ -8,24 +8,24 @@ using Microsoft.EntityFrameworkCore;
 using GuzellikMerkeziYonetimSistemi.Data;
 using GuzellikMerkeziYonetimSistemi.Models;
 
-namespace GuzellikMerkeziYonetimSistemi
+namespace GuzellikMerkeziYonetimSistemi.Controllers
 {
-    public class KullaniciTurusController : Controller
+    public class UzmanliksController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public KullaniciTurusController(ApplicationDbContext context)
+        public UzmanliksController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: KullaniciTurus
+        // GET: Uzmanliks
         public async Task<IActionResult> Index()
         {
-            return View(await _context.KullaniciTurus.ToListAsync());
+            return View(await _context.Uzmanliks.ToListAsync());
         }
 
-        // GET: KullaniciTurus/Details/5
+        // GET: Uzmanliks/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace GuzellikMerkeziYonetimSistemi
                 return NotFound();
             }
 
-            var kullaniciTuru = await _context.KullaniciTurus
+            var uzmanlik = await _context.Uzmanliks
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (kullaniciTuru == null)
+            if (uzmanlik == null)
             {
                 return NotFound();
             }
 
-            return View(kullaniciTuru);
+            return View(uzmanlik);
         }
 
-        // GET: KullaniciTurus/Create
+        // GET: Uzmanliks/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: KullaniciTurus/Create
+        // POST: Uzmanliks/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,KullanıcıTuruAdi")] KullaniciTuru kullaniciTuru)
+        public async Task<IActionResult> Create([Bind("Id,UzmanlikAdi")] Uzmanlik uzmanlik)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(kullaniciTuru);
+                _context.Add(uzmanlik);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(kullaniciTuru);
+            return View(uzmanlik);
         }
 
-        // GET: KullaniciTurus/Edit/5
+        // GET: Uzmanliks/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace GuzellikMerkeziYonetimSistemi
                 return NotFound();
             }
 
-            var kullaniciTuru = await _context.KullaniciTurus.FindAsync(id);
-            if (kullaniciTuru == null)
+            var uzmanlik = await _context.Uzmanliks.FindAsync(id);
+            if (uzmanlik == null)
             {
                 return NotFound();
             }
-            return View(kullaniciTuru);
+            return View(uzmanlik);
         }
 
-        // POST: KullaniciTurus/Edit/5
+        // POST: Uzmanliks/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,KullanıcıTuruAdi")] KullaniciTuru kullaniciTuru)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UzmanlikAdi")] Uzmanlik uzmanlik)
         {
-            if (id != kullaniciTuru.Id)
+            if (id != uzmanlik.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace GuzellikMerkeziYonetimSistemi
             {
                 try
                 {
-                    _context.Update(kullaniciTuru);
+                    _context.Update(uzmanlik);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!KullaniciTuruExists(kullaniciTuru.Id))
+                    if (!UzmanlikExists(uzmanlik.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace GuzellikMerkeziYonetimSistemi
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(kullaniciTuru);
+            return View(uzmanlik);
         }
 
-        // GET: KullaniciTurus/Delete/5
+        // GET: Uzmanliks/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,34 +124,34 @@ namespace GuzellikMerkeziYonetimSistemi
                 return NotFound();
             }
 
-            var kullaniciTuru = await _context.KullaniciTurus
+            var uzmanlik = await _context.Uzmanliks
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (kullaniciTuru == null)
+            if (uzmanlik == null)
             {
                 return NotFound();
             }
 
-            return View(kullaniciTuru);
+            return View(uzmanlik);
         }
 
-        // POST: KullaniciTurus/Delete/5
+        // POST: Uzmanliks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var kullaniciTuru = await _context.KullaniciTurus.FindAsync(id);
-            if (kullaniciTuru != null)
+            var uzmanlik = await _context.Uzmanliks.FindAsync(id);
+            if (uzmanlik != null)
             {
-                _context.KullaniciTurus.Remove(kullaniciTuru);
+                _context.Uzmanliks.Remove(uzmanlik);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool KullaniciTuruExists(int id)
+        private bool UzmanlikExists(int id)
         {
-            return _context.KullaniciTurus.Any(e => e.Id == id);
+            return _context.Uzmanliks.Any(e => e.Id == id);
         }
     }
 }

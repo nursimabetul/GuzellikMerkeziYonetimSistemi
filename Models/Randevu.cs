@@ -11,16 +11,20 @@
 
 		// İşlem Türü
 		public int IslemId { get; set; }
-		//public Islem Islem    { get; set; }   
+		public Islem Islem    { get; set; }
+
+
+
 		// İşlem Süresi
 
 		// Ücret
 
+		public int SalonId { get; set; }
+		public Salon Salon { get; set; }
 
-		
 		// Randevu alan kullanıcı bilgileri
 
-		// Durumu
+		public Durum durum { get; set; }
 		public string Aciklama { get; set; }
 
 	}

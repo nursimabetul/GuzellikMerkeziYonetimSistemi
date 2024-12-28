@@ -15,8 +15,9 @@ namespace GuzellikMerkeziYonetimSistemi.Controllers
 
         public IActionResult Index()
         {
-            return View();
-        }
+            return !this.User.Identity.IsAuthenticated ? Redirect("~/identity/account/login") : this.Redirect("Index");
+			//return View();
+		}
 
         public IActionResult Privacy()
         {

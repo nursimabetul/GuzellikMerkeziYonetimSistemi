@@ -16,6 +16,7 @@ namespace GuzellikMerkeziYonetimSistemi.Data
 		public DbSet<KullaniciTuru> KullaniciTurus { get; set; }
 		public DbSet<Salon> Salons { get; set; }
 		public DbSet<Uzmanlik> Uzmanliks { get; set; }
+		public DbSet<Sil> Sils { get; set; }
 
 	}
 }

@@ -6,8 +6,8 @@
 		public DateTime RandevuTarihi { get; set; }
 
 
-		public int PersonelId { get; set; }
-		public Personel Personel { get; set; }
+		public int UserID { get; set; }
+		public Kullanici Kullanici { get; set; }
 
 		// İşlem Türü
 		public int IslemId { get; set; }
